@@ -1,0 +1,19 @@
+<!-- profile.html -->
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>User Profile</h1>
+
+    <h2>Rated Activities</h2>
+    {% if user_activities %}
+        <ul>
+            {% for activity in user_activities %}
+                <li>{{ activity.category.name }} - {{ activity.date }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No rated activities yet.</p>
+    {% endif %}
+{% endblock %}
+</html>

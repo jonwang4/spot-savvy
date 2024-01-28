@@ -28,6 +28,7 @@ class ActivityCategory(models.Model):
         return self.name
 
 class Activity(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True)
     enjoyability_score = models.PositiveIntegerField(default=5)
     latitude = models.DecimalField(max_digits=9, decimal_places=6)
     longitude = models.DecimalField(max_digits=9, decimal_places=6)
@@ -46,7 +47,7 @@ class Activity(models.Model):
             'https://maps.googleapis.com/maps/api/geocode/json',
             params={
                 'address': f'{self.category.name}, {self.date}',  # Use a meaningful address for better results
-                'key': 'Your Google Maps API Key',
+                'key': 'Your Google Maps API Key', #Need to get API key developer license
             }
         )
 
