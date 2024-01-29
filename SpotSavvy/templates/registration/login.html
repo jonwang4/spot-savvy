@@ -1,17 +1,19 @@
 <!-- login.html -->
-<!DOCTYPE html>
-<head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy0z97DkDShGtFZh2LlQV8AA2DHD9h89Z" crossorigin="anonymous">
-</head>
 {% extends 'base.html' %}
 
-{% block content %}
-  <h2>Login</h2>
-  <form method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-  </form>
+{% block title %}Login - My Project{% endblock %}
 
-  <p>Don't have an account? <a href="{% url 'register' %}">Register here</a>.</p>
+{% block content %}
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <div style="width: 300px; text-align: center;">
+            <h2>Login</h2>
+            <form method="post" action="{% url 'login' %}" style="margin-top: 20px;">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+
+            <p style="margin-top: 10px;">Don't have an account? <a href="{% url 'register' %}">Register here</a>.</p>
+        </div>
+    </div>
 {% endblock %}

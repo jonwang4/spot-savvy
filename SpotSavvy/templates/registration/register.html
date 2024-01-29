@@ -1,26 +1,20 @@
 <!-- register.html -->
 {% extends 'base.html' %}
 
+{% block title %}Register - My Project{% endblock %}
+
 {% block content %}
-  <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-header">
-            <h2 class="text-center">Create an Account</h2>
-          </div>
-          <div class="card-body">
-            <form method="post" action="{% url 'register' %}" class="needs-validation" novalidate>
-              {% csrf_token %}
-              {{ form.as_p }}
-              <button type="submit" class="btn btn-primary btn-block mt-3">Register</button>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <div style="width: 400px; text-align: center;">
+            <h2>Create an Account</h2>
+            <form method="post" action="{% url 'register' %}" style="margin-top: 20px;" class="needs-validation" novalidate>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary btn-block mt-3">Register</button>
             </form>
-          </div>
-          <div class="card-footer">
-            <p class="text-center">Already have an account? <a href="{% url 'login' %}">Login</a></p>
-          </div>
+
+            <p style="margin-top: 20px; margin-bottom: 0;">Already have an account?</p>
+            <a href="{% url 'login' %}" style="display: block; margin-top: 5px;">Login here</a>
         </div>
-      </div>
     </div>
-  </div>
 {% endblock %}
