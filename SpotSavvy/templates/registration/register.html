@@ -1,0 +1,26 @@
+<!-- register.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="text-center">Create an Account</h2>
+          </div>
+          <div class="card-body">
+            <form method="post" action="{% url 'register' %}" class="needs-validation" novalidate>
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit" class="btn btn-primary btn-block mt-3">Register</button>
+            </form>
+          </div>
+          <div class="card-footer">
+            <p class="text-center">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

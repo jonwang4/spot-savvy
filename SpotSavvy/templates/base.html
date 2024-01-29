@@ -2,11 +2,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Head elements -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Project{% endblock %}</title>
+    <!-- Include Bootstrap CSS here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy0z97DkDShGtFZh2LlQV8AA2DHD9h89Z" crossorigin="anonymous">
 </head>
 <body>
-    <div class="content">
+    <div class="container">
         {% block content %}{% endblock %}
     </div>
+    <!-- Include Bootstrap JS and other scripts if needed -->
 </body>
 </html>
+

@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
 from datetime import date
 from django.http import HttpResponse
 from .models import Activity, ActivityCategory, Location, UserProfile
 from .tasks import update_activity_location_from_google_maps
+
 
 # Create your views here.
 # views.py
@@ -41,10 +45,31 @@ def create_activity(request):
     # Render a template or redirect as needed
     return render(request, 'your_template.html', {'activity': activity})
 
-def homepage(request, username):
-    # Retrieve the user based on the provided username
-    user = get_object_or_404(User, username=username)
-    return render(request, 'homepage.html', {'user': user})
+def registration_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # Redirect to login page or any other desired page after successful registration
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+
+    return render(request, 'registration/register.html', {'form': form})
+
+class RegisterView(CreateView):
+    template_name = 'registration/register.html'  # Create this template
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+
+@login_required
+def homepage(request, username=None):
+    if username:
+        # Retrieve the user based on the provided username
+        user = User.objects.get(username=username)
+        return render(request, 'homepage.html', {'user': user})
+    else:
+        return render(request, 'homepage.html')  # You can modify this based on your needs
 
 @login_required
 def profile(request, username):

@@ -19,6 +19,8 @@ from django.contrib.auth.views import LoginView
 
 urlpatterns = [
     re_path(r'^admin/', admin.site.urls),
-    re_path('', LoginView.as_view(), name='login'),
-    re_path('SpotSavvy/', include('SpotSavvy.urls')),
+    re_path(r'^login/', LoginView.as_view(), name='login'),
+    re_path(r'^', include('SpotSavvy.urls')),  # Handle the root URL
 ]
+
+
