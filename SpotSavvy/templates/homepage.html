@@ -10,5 +10,13 @@
 <body>
     <h1>Welcome to MyApp!</h1>
     <p>This is the main page.</p>
+    <main>
+        {% if user.is_authenticated %}
+            <p>Welcome, {{ user.username }}!</p>
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <p>Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'register' %}">register</a>.</p>
+        {% endif %}
+</main>
 </body>
 </html>

@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'a!1&pg7xc60xr$_6zi19l@zo(y6rpu^@l-7qsyp%)5gq_8!7s1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True #Set to false when needed
 
 ALLOWED_HOSTS = []
 
@@ -122,3 +122,5 @@ STATIC_URL = '/static/'
 
 # Use BigAutoField as the default primary key type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = '/accounts/login/'

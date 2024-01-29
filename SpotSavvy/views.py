@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView
+from django.contrib.auth import login
+from django.contrib.auth.views import LogoutView
 from django.urls import reverse_lazy
 from datetime import date
 from django.http import HttpResponse
@@ -49,12 +51,14 @@ def registration_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            # Redirect to login page or any other desired page after successful registration
-            return redirect('login')
+            user = form.save()
+            # Log in the user
+            login(request, user)
+            # Redirect to the user's homepage
+            return redirect('home', username=user.username)
+            #return redirect('login')
     else:
         form = UserCreationForm()
-
     return render(request, 'registration/register.html', {'form': form})
 
 class RegisterView(CreateView):
@@ -78,3 +82,7 @@ def profile(request, username):
     user_profile = UserProfile.objects.get(user__username=username)
     # Pass the activities to the template
     return render(request, 'profile.html', {'user_activities': user_activities})
+
+def logout_view(request):
+    # Custom logic before logout if needed
+    return LogoutView.as_view()(request)
