@@ -5,18 +5,41 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy0z97DkDShGtFZh2LlQV8AA2DHD9h89Z" crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyApp - Home</title>
+    <title>SpotSavvy - Home</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        main {
+            margin: 50px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .logout-link {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to MyApp!</h1>
-    <p>This is the main page.</p>
-    <main>
-        {% if user.is_authenticated %}
-            <p>Welcome, {{ user.username }}!</p>
-            <a href="{% url 'logout' %}">Logout</a>
-        {% else %}
-            <p>Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'register' %}">register</a>.</p>
-        {% endif %}
-</main>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <a class="btn btn-danger logout-link" href="{% url 'logout' %}">Logout</a>
+                <h1 class="mt-5 mb-4 text-center">Welcome to SpotSavvy!</h1>
+                <p class="text-center">This is the main page.</p>
+                <main class="bg-light p-4 rounded">
+                    {% if user.is_authenticated %}
+                        <p>Welcome, <strong>{{ user.username }}</strong>!</p>
+                    {% else %}
+                        <p class="text-center">Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'register' %}">register</a>.</p>
+                    {% endif %}
+                </main>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
